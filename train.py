@@ -46,3 +46,33 @@ def train(model, train_loader, device,
             optimizer.step()
 
     return model, training_stats
+
+
+if __name__ == '__main__':
+
+    #TODO: Get through CLI args
+    epochs = 10
+    batch_size = 1
+    use_gpu = False
+    tile_size = (256, 256)
+
+    device = utils.device(use_gpu=use_gpu)
+
+    model = FCNN()
+
+    train_loader = dataset.training_loader(batch_size=batch_size,
+                                           tile_size=tile_size)
+
+    model, stats = train(model=model,
+                         train_loader=train_loader,
+                         device=device,
+                         epochs=epochs,
+                         batch_size=batch_size,
+                         tile_size=tile_size)
+
+    model_path = utils.save_weights_to_disk(model)
+    print('(i) Model saved at {}'.format(model_path))
+
+    loss_plot_path = './images/output/loss_plot.png'
+    stats.save_loss_plot(loss_plot_path)
+    print('(i) Loss plot saved at {}'.format(loss_plot_path))
