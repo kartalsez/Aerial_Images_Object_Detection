@@ -43,3 +43,17 @@ Epoch 10/10: 100%|████████████████████�
 ```
 
 ![Loss plot](./images/output/loss_plot.png "Loss plot")
+
+## Predict
+
+```
+$ python predict.py
+```
+
+#### Output
+
+```
+(i) Prediction image saved at ./images/output/prediction.png
+```
+
+![Predicted image](./images/output/prediction.png "Predicted image")
