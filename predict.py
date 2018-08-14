@@ -32,3 +32,27 @@ def predict(model, data_loader, device, class_label):
 
     #TODO: Subclass error
     raise ValueError('Unknown class label: {}'.format(class_label))
+
+
+if __name__ == '__main__':
+
+    #TODO: Get through CLI arg
+    use_gpu = False
+    tile_size = (256, 256)
+
+    device = utils.device(use_gpu=use_gpu)
+
+    model = FCNN()
+    model = utils.load_weights_from_disk(model)
+
+    loader = dataset.full_image_loader(tile_size=tile_size)
+
+    prediction = predict(model, loader, device=device,
+                         class_label=ClassLabel.house)
+
+    input_image = utils.input_image()
+    pred_image = utils.overlay_class_prediction(input_image, prediction)
+
+    pred_image_path = './images/output/prediction.png'
+    pred_image.save(pred_image_path)
+    print('(i) Prediction image saved at {}'.format(pred_image_path))
