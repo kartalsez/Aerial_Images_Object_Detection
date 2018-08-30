@@ -1,4 +1,4 @@
-# Aerial Image Segmentation Challenge
+# Aerial Image Segmentation
 
 ### Prerequisites
 
