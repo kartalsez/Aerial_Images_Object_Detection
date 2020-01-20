@@ -72,9 +72,11 @@ def x_dtype():
 def y_dtype():
     return torch.long
 
+def get_label_image_size():
+    return Image.open(LABEL_IMAGE_PATH).size
 
 def input_image():
-    return Image.open(INPUT_IMAGE_PATH)
+    return Image.open(INPUT_IMAGE_PATH).resize(get_label_image_size())
 
 
 def label_image():
@@ -181,3 +183,4 @@ def overlay_class_prediction(image, prediction, color=(255, 0, 0)):
     input_image = input_image.crop((0, 0, original_size[0], original_size[1]))
 
     return input_image
+
